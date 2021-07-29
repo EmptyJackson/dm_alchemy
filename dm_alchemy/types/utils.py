@@ -17,6 +17,7 @@
 
 import enum
 import math
+import random
 from typing import Callable, Dict, List, Mapping, Optional, Sequence, Set, Union
 
 import dataclasses
@@ -346,7 +347,7 @@ class ChemistrySeen:
     """Samples content types for each content group."""
     contents = []
     for group in self.groups:
-      contents.append(np.where(np.random.multinomial(1, group.distr))[0][0])
+      contents.append(random.choices(range(len(group.distr)), group.distr)[0])
     return contents
 
   def uses_content_type(self, content: ElementContent) -> bool:

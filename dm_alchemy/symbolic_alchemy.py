@@ -17,6 +17,7 @@
 
 import abc
 import copy
+import random
 import functools
 from typing import Any, Callable, Dict, List, Mapping, MutableMapping, Optional, Sequence, Tuple, Union
 
@@ -861,7 +862,8 @@ def get_symbolic_alchemy_level(
     reward_weights=None, max_steps_per_trial=DEFAULT_MAX_STEPS_PER_TRIAL,
     see_chemistries=None, generate_events=False):
   """Gets a symbolic alchemy instance of the level passed in."""
-  random_state = np.random.RandomState(seed)
+  # TODO: Use seed
+  random_state = random.Random()
 
   if 'perceptual_mapping_randomized' in level_name:
     _, index_to_perm_index = precomputed_maps.get_perm_index_conversion()

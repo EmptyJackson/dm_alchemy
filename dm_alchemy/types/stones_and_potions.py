@@ -19,6 +19,7 @@ import collections
 import copy
 import itertools
 import math
+import random
 from typing import Counter, Dict, List, MutableSequence, NewType, Optional, Reversible, Sequence, Tuple
 
 import dataclasses
@@ -185,9 +186,9 @@ def possible_aligned_stones_coords_only() -> List[AlignedStone]:
 
 
 def random_aligned_stone(
-    random_state: np.random.RandomState) -> AlignedStone:
+    random_state: random.Random) -> AlignedStone:
   return aligned_stone_from_index(
-      random_state.randint(0, AlignedStone.num_types))
+      random_state.randint(0, AlignedStone.num_types-1))
 
 
 def aligned_stones_with_coords(
@@ -307,9 +308,9 @@ def possible_rotations() -> List[np.ndarray]:
   return [rotation_from_angles(angles) for angles in list_angles]
 
 
-def random_rotation(random_state: np.random.RandomState):
+def random_rotation(random_state: random.Random):
   poss_rotations = possible_rotations()
-  return poss_rotations[random_state.choice(len(poss_rotations))]
+  return poss_rotations[random_state.randint(0, len(poss_rotations)-1)]
 
 
 def rotations_equal(rotation1: np.ndarray, rotation2: np.ndarray):
@@ -351,9 +352,9 @@ def latent_stone_from_index(ind: LatentStoneIndex) -> LatentStone:
   return LatentStone(index_to_coords(ind))
 
 
-def random_latent_stone(random_state: np.random.RandomState) -> LatentStone:
+def random_latent_stone(random_state: random.Random) -> LatentStone:
   return latent_stone_from_index(
-      random_state.randint(0, LatentStone.num_types))
+      random_state.randint(0, LatentStone.num_types-1))
 
 
 def possible_latent_stones() -> List[LatentStone]:
@@ -428,8 +429,8 @@ def stone_map_from_index(ind: StoneMapIndex) -> StoneMap:
   return StoneMap(index_to_coords(ind))
 
 
-def random_stone_map(random_state: np.random.RandomState) -> StoneMap:
-  return stone_map_from_index(random_state.randint(0, StoneMap.num_types))
+def random_stone_map(random_state: random.Random) -> StoneMap:
+  return stone_map_from_index(random_state.randint(0, StoneMap.num_types-1))
 
 
 def possible_stone_maps() -> List[StoneMap]:
@@ -559,9 +560,9 @@ def possible_perceived_potions() -> List[PerceivedPotion]:
 
 
 def random_perceived_potion(
-    random_state: np.random.RandomState) -> PerceivedPotion:
+    random_state: random.Random) -> PerceivedPotion:
   return perceived_potion_from_index(
-      random_state.randint(0, PerceivedPotion.num_types))
+      random_state.randint(0, PerceivedPotion.num_types-1))
 
 
 LatentPotionIndex = NewType('LatentPotionIndex', int)
@@ -601,9 +602,9 @@ def latent_potion_from_index(ind: LatentPotionIndex) -> LatentPotion:
   return LatentPotion(int(latent_dim), index_to_dir(int(latent_dir)))
 
 
-def random_latent_potion(random_state: np.random.RandomState) -> LatentPotion:
+def random_latent_potion(random_state: random.Random) -> LatentPotion:
   return latent_potion_from_index(
-      random_state.randint(0, LatentPotion.num_types))
+      random_state.randint(0, LatentPotion.num_types-1))
 
 
 def possible_latent_potions() -> List[LatentPotion]:
@@ -674,9 +675,9 @@ def potion_map_from_index(
 
 
 def random_potion_map(
-    index_to_perm_index: np.ndarray, random_state: np.random.RandomState
+    index_to_perm_index: np.ndarray, random_state: random.Random
 ) -> PotionMap:
-  return potion_map_from_index(random_state.randint(0, PotionMap.num_types),
+  return potion_map_from_index(random_state.randint(0, PotionMap.num_types-1),
                                index_to_perm_index)
 
 
