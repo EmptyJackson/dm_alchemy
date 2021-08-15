@@ -495,7 +495,7 @@ def random_graph(
 ) -> Graph:
   graphs = list(distr.keys())
   return graphs[random_state.choices(
-      len(graphs), np.array(list(distr.values()), dtype=np.float32))]
+      range(len(graphs)), np.array(list(distr.values()), dtype=np.float32))]
 
 
 def cube_edges() -> List[Tuple[int, int]]:
